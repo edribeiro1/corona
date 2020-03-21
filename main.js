@@ -32,7 +32,7 @@ function getLocation() {
 }
 
 function initMapa() {
-    map = L.map('mapa', {minZoom: 1}).setView([-22.738045, -47.084488], 5);
+    map = L.map('mapa', {minZoom: 1}).setView([-14.2350, -51.9253], 5);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
         }
