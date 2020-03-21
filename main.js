@@ -44,7 +44,7 @@ $(function () {
 });
 
 function getLocation(casos) {
-    map.locate({setView: true, maxZoom: 16});
+    map.locate({setView: true, maxZoom: 5});
     map.on('locationfound', (e) => {        
         casos.forEach(caso => {
             zonaSegura = (parseInt(map.distance(e.latlng, [caso.lat, caso.lng])) > 300);
