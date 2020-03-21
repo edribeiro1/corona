@@ -50,15 +50,58 @@ function initAnimationZona() {
 }
 
 function createMarker(dado) {
+    dado.qtde_confirmado = $.isNumeric(dado.qtde_confirmado)? parseInt(dado.qtde_confirmado) : 0;
+    dado.qtd_suspeitos = $.isNumeric(dado.qtd_suspeitos)? parseInt(dado.qtd_suspeitos) : 0;
+    dado.qtde_mortes = $.isNumeric(dado.qtde_mortes)? parseInt(dado.qtde_mortes) : 0;
+
+    dado.lat = $.isNumeric(dado.lat)? parseInt(dado.lat) : 0;
+    dado.lng = $.isNumeric(dado.lng)? parseInt(dado.lng) : 0;
+
     return L.circleMarker([dado.lat, dado.lng], {
         color: '#ff4e4e',
         fillColor: '#ff4e4e',
         fillOpacity: 0.5,
         radius: 6 + (6 * (parseInt(dado.qtde_confirmado)/50))
-    }).bindTooltip(`
-        Cidade: ${dado.cidade}<br>
-        Casos confirmados: ${dado.qtde_confirmado}
-    `).addTo(map);
+    }).bindTooltip(templateTooltip(dado)).addTo(map);
+}
+function templateTooltip(dado) {
+    let cidade = (dado.cidade)? dado.cidade : '';
+    let totalConfirmado = dado.qtde_confirmado;
+    let totalSuspeito = dado.qtd_suspeitos;
+    let totalMortos = dado.qtde_mortes;
+    let totalCasos = totalConfirmado + totalSuspeito;
+    
+    return `
+        <div class="tooltip-info">
+            <label>${cidade}</label>
+            <div>
+                <div class="total-casos">Total de casos:</div>
+                <span>${totalCasos}</span>
+            </div>
+            <hr>
+            <div>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao confirmado"></div>
+                    Confirmados:
+                </span>
+                <span>${totalConfirmado}</span>
+            </div>
+            <div>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao suspeito"></div>
+                    Suspeitas:
+                </span>
+                <span>${totalSuspeito}</span>
+            </div>
+            <div>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao mortos"></div>
+                    Mortos:
+                </span>
+                <span>${totalMortos}</span>
+            </div>
+        </div>
+    `;
 }
 
 function buscarCasos(cb) {

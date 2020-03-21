@@ -28,6 +28,47 @@ img.leaflet-tile.leaflet-tile-loaded {
     filter: invert(1) grayscale(1) !important;
 }
 
+.tooltip-info {
+    font-size: 12px;
+    min-width: 200px;
+    font-family: 'Roboto';
+}
+.tooltip-info label {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;margin-bottom: 10px;
+}
+.tooltip-info div {
+    display: flex;
+    justify-content: space-between;
+}
+.tooltip-info .total-casos {
+    color: red;
+}
+
+
+.casos-ocorridos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+}
+.casos-notificacao {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.casos-notificacao.confirmado {
+    background-color: #F4C363;
+}
+.casos-notificacao.suspeito {
+    background-color: #60BB69;
+}
+.casos-notificacao.mortos {
+    background-color: #666;
+}
 
 .pulseOutZonaSegura {
     margin: -3px -1px;
@@ -67,7 +108,6 @@ img.leaflet-tile.leaflet-tile-loaded {
         box-shadow: 0 0 0 0 rgba(114, 176, 38, 0);
     }
 }
-
 .pulseOutZonaPerigo {
     margin: -3px -1px;
     display: block;
@@ -80,8 +120,7 @@ img.leaflet-tile.leaflet-tile-loaded {
     cursor: pointer;
     box-shadow: 0 0 0 rgba(204, 44, 44, 0.4);
     animation: pulseOutZonaPerigo 2s infinite;
-}
-  
+}  
 @-webkit-keyframes pulseOutZonaPerigo {
     0% {
       -webkit-box-shadow: 0 0 0 0 rgba(204, 44, 44, 0.4);
@@ -93,7 +132,6 @@ img.leaflet-tile.leaflet-tile-loaded {
         -webkit-box-shadow: 0 0 0 0 rgba(204, 44, 44, 0);
     }
 }
-
 @keyframes pulseOutZonaPerigo {
     0% {
       -moz-box-shadow: 0 0 0 0 rgba(204, 44, 44, 0.4);
