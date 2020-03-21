@@ -1,0 +1,110 @@
+html {
+    height: 100vh;
+}
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.marker-cluster, .marker-cluster div {
+    color: #fff;
+    background-color: rgba(244, 67, 54, 0.45);
+}
+
+.country {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 400px;
+    z-index: 999;
+    background-color: #303030;
+    box-shadow: 10px 0px 45px 0px #000;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Roboto', sans-serif;
+}
+
+img.leaflet-tile.leaflet-tile-loaded {
+    filter: invert(1) grayscale(1) !important;
+}
+
+
+.pulseOutZonaSegura {
+    margin: -3px -1px;
+    display: block;
+    width: 22px !important;
+    height: 21px !important;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: rgba(114, 176, 38, .5);
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(114, 176, 38, .5);;
+    animation: pulseOutZonaSegura 2s infinite;
+}  
+@-webkit-keyframes pulseOutZonaSegura {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 rgba(114, 176, 38, .4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 100px rgba(114, 176, 38, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(114, 176, 38, 0);
+    }
+}
+@keyframes pulseOutZonaSegura {
+    0% {
+      -moz-box-shadow: 0 0 0 0 rgba(114, 176, 38, .4);
+      box-shadow: 0 0 0 0 rgba(114, 176, 38, .4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(114, 176, 38, 0);
+        box-shadow: 0 0 0 100px rgba(114, 176, 38, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(114, 176, 38, 0);
+        box-shadow: 0 0 0 0 rgba(114, 176, 38, 0);
+    }
+}
+
+.pulseOutZonaPerigo {
+    margin: -3px -1px;
+    display: block;
+    width: 22px !important;
+    height: 21px !important;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: rgba(204, 44, 44, 0.4);
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(204, 44, 44, 0.4);
+    animation: pulseOutZonaPerigo 2s infinite;
+}
+  
+@-webkit-keyframes pulseOutZonaPerigo {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 rgba(204, 44, 44, 0.4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 100px rgba(204, 44, 44, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204, 44, 44, 0);
+    }
+}
+
+@keyframes pulseOutZonaPerigo {
+    0% {
+      -moz-box-shadow: 0 0 0 0 rgba(204, 44, 44, 0.4);
+      box-shadow: 0 0 0 0 rgba(204, 44, 44, 0.4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(204, 44, 44, 0);
+        box-shadow: 0 0 0 100px rgba(204, 44, 44, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(204, 44, 44, 0);
+        box-shadow: 0 0 0 0 rgba(204, 44, 44, 0);
+    }
+}

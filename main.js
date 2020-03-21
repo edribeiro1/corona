@@ -1,34 +1,41 @@
 var map = {};
 var cluster = {}
+var zonaSegura = false;
+
 $(function () {
     $(document).ready(function () {
         initMapa();
-        getLocation();   
-
         buscarCasos((casos) => {
-            cluster = L.markerClusterGroup({
-                spiderfyOnMaxZoom :  false ,
-                showCoverageOnHover :  false ,
-                zoomToBoundsOnClick :  true,
-                disableClusteringAtZoom: 17,
-            });
             let markers = [];
-
             for (const i in casos) {
                 if (casos.hasOwnProperty(i)) {
                     let caso = casos[i];
                     markers.push(createMarker(caso));
                 }
             }
-            // cluster.addLayers(markers);
-            // map.addLayer(cluster);
+            getLocation(casos);
+        });
+
+        map.on('zoomend', () => {
+            initAnimationZona();
+            map.invalidateSize();
         });
     });
 });
 
-function getLocation() {
+function getLocation(casos) {
     map.locate({setView: true, maxZoom: 16});
-    map.on('locationfound', (e) => L.marker(e.latlng).addTo(map));
+    map.on('locationfound', (e) => {        
+        casos.forEach(caso => {
+            zonaSegura = (parseInt(map.distance(e.latlng, [caso.lat, caso.lng])) > 300);
+        });
+
+        let icon = L.AwesomeMarkers.icon({
+            'markerColor': (zonaSegura)? "green" : "red"
+        });
+        L.marker(e.latlng, {'icon': icon}).addTo(map);
+        initAnimationZona()
+    });
 }
 
 function initMapa() {
@@ -37,6 +44,9 @@ function initMapa() {
         attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
         }
     ).addTo(map);
+}
+function initAnimationZona() {
+    $('div.awesome-marker-shadow.awesome-marker.leaflet-zoom-animated').addClass((zonaSegura)? 'pulseOutZonaSegura': 'pulseOutZonaPerigo');
 }
 
 function createMarker(dado) {
@@ -53,7 +63,6 @@ function createMarker(dado) {
 
 function buscarCasos(cb) {
     $.ajax({
-        // url: "172.19.254.180/api-corona/casos",
         url: "http://ec2-54-196-120-46.compute-1.amazonaws.com/api-corona/",
         type: 'get',
         dataType: 'json',
