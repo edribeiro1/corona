@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161434137-1"></script>
@@ -13,81 +13,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coronavirus</title>
-    <meta name="description" content="Coronavirus fique por dentro dos estados e cidades com covid-19">
+    <meta name="description" content="Coronavirus fique por dentro dos estados e cidades com covid-19, tudo isso em tempo real, COVID-19 e perigoso">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="main.css">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
 </head>
 <body>
-    <div class="country">
-        <div class="title">
-            <span>COVIDBRASIL</span>
+    <div class="container">
+        <div id="mapa"></div>
+
+        <div class="country mobile">
+            <div class="pullbar"></div>
+            <div class="title">
+                <span>COVIDBRASIL</span>
+            </div>
+
+            <div class="cidade-selecionada">
+                <div class="template-cidade-selecionada" data-lat="${lat}" data-lng="${lng}">
+                    <span id="cidadeSelecionadaNome" style="margin: 0px 0px 0px 25px">Brasil</span>
+                    <span class="total-casos" style="margin: 0px 25px 0px 0px; font-weight: bold;">
+                        <span id="cidadeSelecionadaTotalCasos">0</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div>
+                <span class="total-casos">Total de casos:</span>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao casos"></div>
+                </span>
+                <span id="totalCasos">0</span>
+            </div>
+            <hr>
+            <div>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao confirmado"></div>
+                    Confirmados:
+                </span>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao confirmado"></div>
+                </span>
+                <span id="totalConfirmado">0</span>
+            </div>
+            <div>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao suspeito"></div>
+                    Suspeitas:
+                </span>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao suspeito"></div>
+                </span>
+                <span id="totalSuspeito">0</span>
+            </div>
+            <div>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao mortos"></div>
+                    Mortos:
+                </span>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao mortos"></div>
+                </span>
+                <span id="totalMortos">0</span>
+            </div>
+            <div>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao vivos"></div>
+                    População:
+                </span>
+                <span class="casos-ocorridos">
+                    <div class="casos-notificacao vivos"></div>
+                </span>
+                <span id="totalVivos">0</span>
+            </div>
+            <hr>
+            <div class="container-cities-list">
+                <ul class="cities-list"></ul>
+            </div>
         </div>
-        <div>
-            <span class="total-casos">Total de casos:</span>
-            <span class="casos-ocorridos">
-                <div class="casos-notificacao casos"></div>
-            </span>
-            <span id="totalCasos"></span>
-        </div>
-        <hr>
-        <div>
-            <span class="casos-ocorridos">
-                <div class="casos-notificacao confirmado"></div>
-                Confirmados:
-            </span>
-            <span class="casos-ocorridos">
-                <div class="casos-notificacao confirmado"></div>
-            </span>
-            <span id="totalConfirmado"></span>
-        </div>
-        <div>
-            <span class="casos-ocorridos">
-                <div class="casos-notificacao suspeito"></div>
-                Suspeitas:
-            </span>
-            <span class="casos-ocorridos">
-                <div class="casos-notificacao suspeito"></div>
-            </span>
-            <span id="totalSuspeito"></span>
-        </div>
-        <div>
-            <span class="casos-ocorridos">
-                <div class="casos-notificacao mortos"></div>
-                Mortos:
-            </span>
-            <span class="casos-ocorridos">
-                <div class="casos-notificacao mortos"></div>
-            </span>
-            <span id="totalMortos"></span>
-        </div>
-        <div>
-            <span class="casos-ocorridos">
-                <div class="casos-notificacao vivos"></div>
-                População:
-            </span>
-            <span class="casos-ocorridos">
-                <div class="casos-notificacao vivos"></div>
-            </span>
-            <span id="totalVivos">209.3 milhões</span>
-        </div>
-        <hr>
-        <ul class="cities-list"></ul>
     </div>
-    
-    <div id="mapa" style="width: 100%; height: 100%; background-color: #222222;"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-countto/1.2.0/jquery.countTo.min.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

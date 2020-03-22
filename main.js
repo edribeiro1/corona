@@ -6,7 +6,31 @@ $(function () {
     $(document).ready(function () {
         $(document).on('click', '.template-cidade', function (ev) {
             let self = $(this);
-            map.setView([self.data('lat'),self.data('lng')], 15);            
+            map.setView([self.data('lat'),self.data('lng')], 12);
+
+            if ($('.container-cities-list').hasClass("selecionar-cidade")) {
+                $('.selecionar-cidade').removeClass('selecionar-cidade');
+                let totalConfirmado = self.data("confirmado");
+                let totalSuspeito = self.data("suspeito");
+                let totalMortos = self.data("mortos");
+                let cidade = self.data("cidade");
+
+                $('#cidadeSelecionadaNome').text(cidade);
+                $('#cidadeSelecionadaTotalCasos').text((totalConfirmado + totalSuspeito + totalMortos));
+                setTotalCountTo('#totalCasos', (totalConfirmado + totalSuspeito + totalMortos));
+                setTotalCountTo('#totalConfirmado', totalConfirmado);
+                setTotalCountTo('#totalSuspeito', totalSuspeito);
+                setTotalCountTo('#totalMortos', totalMortos);
+                setTotalCountTo('#totalVivos', parseFloat(209), ()=> $('#totalVivos').text(`${$('#totalVivos').text()}.3 milhões`));
+            }
+        });
+        $(document).on('click', '.template-estado', function (ev) {
+            let self = $(this).closest('li');
+            $('.selecionado').removeClass("selecionado");
+            $(self).toggleClass("selecionado");
+        });
+        $(document).on('click', '.template-cidade-selecionada', function (params) {
+           $('.container-cities-list').addClass("selecionar-cidade");
         });
         
         initMapa();
@@ -15,6 +39,8 @@ $(function () {
             let totalConfirmado = 0;
             let totalSuspeito = 0;
             let totalMortos = 0;
+            let agrupamentoEstado = {};
+
             for (const i in casos) {
                 if (casos.hasOwnProperty(i)) {
                     let caso = casos[i];
@@ -24,14 +50,42 @@ $(function () {
                     totalSuspeito += caso.qtd_suspeitos;
                     totalMortos += caso.qtde_mortes;
 
+                    if (Array.isArray(agrupamentoEstado[caso.estado])) {
+                        agrupamentoEstado[caso.estado].push(templateCities(caso))
+                        agrupamentoEstado[caso.estado].totalCasos += (caso.qtde_confirmado + caso.qtd_suspeitos + caso.qtde_mortes);
+                    } else {
+                        agrupamentoEstado[caso.estado] = [templateCities(caso)];
+                        agrupamentoEstado[caso.estado].totalCasos = (caso.qtde_confirmado + caso.qtd_suspeitos + caso.qtde_mortes);
+                    }
+
                     markers.push(createMarker(caso));
-                    $('.cities-list').append(templateCities(caso));
                 }
             }
-            $('#totalCasos').text(totalConfirmado + totalSuspeito + totalMortos);
-            $('#totalConfirmado').text(totalConfirmado);
-            $('#totalSuspeito').text(totalSuspeito);
-            $('#totalMortos').text(totalMortos);
+
+            for (const estado in agrupamentoEstado) {
+                if (agrupamentoEstado.hasOwnProperty(estado)) {
+                    let cidades = agrupamentoEstado[estado];
+                    let total = agrupamentoEstado[estado].totalCasos;
+                    $('.cities-list').append(templateStates(estado, total, cidades));
+                }
+            }
+            $('.cities-list').prepend($(templateCities({
+                'cidade':"Brasil",
+                'qtde_confirmado': totalConfirmado,
+                'qtd_suspeitos': totalSuspeito,
+                'qtde_mortes': totalMortos,
+                'lat': -14.2350,
+                'lng': -51.9253
+            })).addClass('brasil'));
+
+            $('#cidadeSelecionadaNome').text("Brasil");
+            $('#cidadeSelecionadaTotalCasos').text((totalConfirmado + totalSuspeito + totalMortos));
+
+            setTotalCountTo('#totalCasos', (totalConfirmado + totalSuspeito + totalMortos));
+            setTotalCountTo('#totalConfirmado', totalConfirmado);
+            setTotalCountTo('#totalSuspeito', totalSuspeito);
+            setTotalCountTo('#totalMortos', totalMortos);
+            setTotalCountTo('#totalVivos', parseFloat(209), ()=> $('#totalVivos').text(`${$('#totalVivos').text()}.3 milhões`));
             
             getLocation(casos);
         });
@@ -127,12 +181,32 @@ function templateCities(dado) {
 
     return `
         <li>
-            <div class="template-cidade" data-lat="${lat}" data-lng="${lng}">
+            <div class="template-cidade"
+                data-lat="${lat}" 
+                data-lng="${lng}" 
+                data-confirmado="${totalConfirmado}"
+                data-suspeito="${totalSuspeito}"
+                data-mortos="${totalMortos}"
+                data-cidade="${cidade}">
+
                 <span style="margin: 0px 0px 0px 25px">${cidade}</span>
                 <span class="total-casos" style="margin: 0px 25px 0px 0px; font-weight: bold;">${totalCasos}</span>
             </div>
         </li>
     `;
+}
+function templateStates(estado, totalCasos, cidades) {
+    let li = `
+        <li>
+            <div class="template-estado">
+                <span style="margin: 0px 0px 0px 25px">${estado}</span>
+                <span class="total-casos" style="margin: 0px 25px 0px 0px; font-weight: bold;">${totalCasos}</span>
+            </div>            
+        </li>
+    `;
+
+    li = $(li).append($('<div class="estado-lista-cidades"></div>').append(cidades.map((cidade) => cidade)));
+    return li;
 }
 
 function buscarCasos(cb) {
@@ -148,6 +222,19 @@ function buscarCasos(cb) {
             }
         }
     });         
+}
+function setTotalCountTo(element, data, cb) {
+    $(element).countTo({
+        from: 0,
+        to: data,
+        speed: 3000,
+        refreshInterval: 50,
+        onComplete: function() {
+          if (typeof cb == "function") {
+              cb();
+          }
+        }
+    });
 }
 
 function validarDados(dado) {
