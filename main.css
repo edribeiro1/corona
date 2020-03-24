@@ -29,6 +29,7 @@ body {
     box-shadow: 0px 0px 37px #000;
     font-size: 16px;
     padding: 15px 10px;
+    background-color: #202029;
 }
 
 .country div {
@@ -60,9 +61,10 @@ body {
     display: block;
 } */
 .selecionado {
-    box-shadow: 0px 0px 5px 0px #000;
+    /* box-shadow: 0px 0px 5px 0px #000;
+    border-radius: 7px; */
+    border-bottom: solid 1px #000;
     margin-bottom: 20px;
-    border-radius: 7px;
     padding-bottom: 7px;
 } 
 .selecionado div.template-estado {
@@ -71,6 +73,9 @@ body {
 .selecionado div.estado-lista-cidades li, div.estado-lista-cidades {
     height: auto;
     display: block;
+}
+.selecionado .fa-chevron-down {
+    transform: rotate(180deg);
 }
 
 .country .container-cities-list,
@@ -86,10 +91,11 @@ body {
     width: 100%;
     height: 50px;
     margin: 0px 0px 14px 0px;
-    border-radius: 7px;
-    background-color: #3a3a3a;
     align-items: center;
-    box-shadow: 0px 0px 5px 0px #000;
+    /* background-color: #3a3a3a; */
+    /* border-radius: 7px; */
+    /* box-shadow: 0px 0px 5px 0px #000; */
+    border-bottom: solid 1px #15161b;
     cursor: pointer;
 }
 
@@ -145,7 +151,8 @@ body {
         border-top-left-radius: 14px;
         border-top-right-radius: 14px;
         z-index: 9999;
-        background-color: #3a3a3aeb;
+        /* background-color: #3a3a3aeb; */
+        background-color: #202029c7;
         margin-top: 430px;
         height: 100%;
     }
@@ -175,7 +182,8 @@ body {
         height: 50px;
         margin: 0px 0px 24px 0px;
         border-radius: 7px;
-        background-color: #3a3a3a;
+        /* background-color: #3a3a3a; */
+        background-color: #000;
         align-items: center;
         box-shadow: 0px 0px 5px 0px #000;
         cursor: pointer;
@@ -193,7 +201,8 @@ body {
         left: 0px;
         right: 0px;
         bottom: 0px;
-        background-color: #3a3a3aeb;
+        /* background-color: #3a3a3aeb; */
+        background-color: #202029;
         z-index: 99999;
     }
 

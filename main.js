@@ -6,7 +6,7 @@ $(function () {
     $(document).ready(function () {
         $(document).on('click', '.template-cidade', function (ev) {
             let self = $(this);
-            map.setView([self.data('lat'),self.data('lng')], 12);
+            map.setView([self.data('lat'),self.data('lng')], ($(self).closest('li').hasClass('brasil'))? 4 : 12);
 
             if ($('.container-cities-list').hasClass("selecionar-cidade")) {
                 $('.selecionar-cidade').removeClass('selecionar-cidade');
@@ -26,7 +26,9 @@ $(function () {
         });
         $(document).on('click', '.template-estado', function (ev) {
             let self = $(this).closest('li');
-            $('.selecionado').removeClass("selecionado");
+            if (!$(self).hasClass('selecionado')) {
+                $('.selecionado').removeClass("selecionado");                
+            }
             $(self).toggleClass("selecionado");
         });
         $(document).on('click', '.template-cidade-selecionada', function (params) {
@@ -199,8 +201,11 @@ function templateStates(estado, totalCasos, cidades) {
     let li = `
         <li>
             <div class="template-estado">
-                <span style="margin: 0px 0px 0px 25px">${estado}</span>
-                <span class="total-casos" style="margin: 0px 25px 0px 0px; font-weight: bold;">${totalCasos}</span>
+                <span style="margin: 0px 0px 0px 25px; max-width: 245px;">${estado}</span>
+                <span class="total-casos" style="margin: 0px 25px 0px 0px; font-weight: bold;">
+                    ${totalCasos}
+                    <i class="fa fa-chevron-down" style="color: rgba(255, 255, 255, 0.7);"></i>
+                </span>
             </div>            
         </li>
     `;
