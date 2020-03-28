@@ -49,15 +49,15 @@ $(function () {
                     caso = validarDados(caso);
 
                     totalConfirmado += caso.qtde_confirmado;
-                    totalSuspeito += caso.qtd_suspeitos;
+                    totalSuspeito += caso.qtde_suspeito;
                     totalMortos += caso.qtde_mortes;
 
                     if (Array.isArray(agrupamentoEstado[caso.estado])) {
                         agrupamentoEstado[caso.estado].push(templateCities(caso))
-                        agrupamentoEstado[caso.estado].totalCasos += (caso.qtde_confirmado + caso.qtd_suspeitos + caso.qtde_mortes);
+                        agrupamentoEstado[caso.estado].totalCasos += (caso.qtde_confirmado + caso.qtde_suspeito + caso.qtde_mortes);
                     } else {
                         agrupamentoEstado[caso.estado] = [templateCities(caso)];
-                        agrupamentoEstado[caso.estado].totalCasos = (caso.qtde_confirmado + caso.qtd_suspeitos + caso.qtde_mortes);
+                        agrupamentoEstado[caso.estado].totalCasos = (caso.qtde_confirmado + caso.qtde_suspeito + caso.qtde_mortes);
                     }
 
                     markers.push(createMarker(caso));
@@ -74,7 +74,7 @@ $(function () {
             $('.cities-list').prepend($(templateCities({
                 'cidade':"Brasil",
                 'qtde_confirmado': totalConfirmado,
-                'qtd_suspeitos': totalSuspeito,
+                'qtde_suspeito': totalSuspeito,
                 'qtde_mortes': totalMortos,
                 'lat': -14.2350,
                 'lng': -51.9253
@@ -136,7 +136,7 @@ function createMarker(dado) {
 function templateTooltip(dado) {
     let cidade = (dado.cidade)? dado.cidade : '';
     let totalConfirmado = dado.qtde_confirmado;
-    let totalSuspeito = dado.qtd_suspeitos;
+    let totalSuspeito = dado.qtde_suspeito;
     let totalMortos = dado.qtde_mortes;
     let totalCasos = totalConfirmado + totalSuspeito + totalMortos;
     
@@ -175,7 +175,7 @@ function templateTooltip(dado) {
 function templateCities(dado) {
     let cidade = (dado.cidade)? dado.cidade : '';
     let totalConfirmado = dado.qtde_confirmado;
-    let totalSuspeito = dado.qtd_suspeitos;
+    let totalSuspeito = dado.qtde_suspeito;
     let totalMortos = dado.qtde_mortes;
     let lat = dado.lat;
     let lng = dado.lng;
@@ -244,7 +244,7 @@ function setTotalCountTo(element, data, cb) {
 
 function validarDados(dado) {
     dado.qtde_confirmado = $.isNumeric(dado.qtde_confirmado)? parseInt(dado.qtde_confirmado) : 0;
-    dado.qtd_suspeitos = $.isNumeric(dado.qtd_suspeitos)? parseInt(dado.qtd_suspeitos) : 0;
+    dado.qtde_suspeito = $.isNumeric(dado.qtde_suspeito)? parseInt(dado.qtde_suspeito) : 0;
     dado.qtde_mortes = $.isNumeric(dado.qtde_mortes)? parseInt(dado.qtde_mortes) : 0;
     dado.lat = $.isNumeric(dado.lat)? dado.lat : 0;
     dado.lng = $.isNumeric(dado.lng)? dado.lng : 0;
