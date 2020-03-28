@@ -127,10 +127,10 @@ function initAnimationZona() {
 
 function createMarker(dado) {
     return L.circleMarker([dado.lat, dado.lng], {
-        color: '#ff4e4e',
-        fillColor: '#ff4e4e',
-        fillOpacity: 0.5,
-        radius: 6 + (6 * (parseInt(dado.qtde_confirmado)/50))
+        color: '#d60000',
+        fillColor: '#d60000',
+        fillOpacity: 1,
+        radius: 4 + (parseInt(dado.qtde_confirmado)/100)
     }).bindTooltip(templateTooltip(dado)).addTo(map);
 }
 function templateTooltip(dado) {
