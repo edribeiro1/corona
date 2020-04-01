@@ -91,6 +91,27 @@ $(function () {
             
             getLocation(casos);
         });
+        buscarNews((result) => {
+            let noticias_buscadas = [];
+            result.noticias.forEach(noticia => {
+                noticias_buscadas.push(convertXmlToJSon(noticia));
+            });
+            if (!noticias_buscadas.length) {
+                return;
+            }
+            noticias_buscadas.forEach(noticia_buscada => {
+                if (noticia_buscada) {
+                    let noticias = {};
+                    noticias = noticia_buscada.rss.channel;
+                    noticias.item.forEach(noticia => {
+                        if (noticia.title.toLocaleLowerCase().search('coronavirus') > -1 || noticia.title.toLocaleLowerCase().search('covid-19') > -1 ) {
+                            $('.news').append(templateNews(noticia));
+                        }
+                    });
+                }
+            });
+            $('.news').removeClass('none');
+        });
 
         map.on('zoomend', () => {
             initAnimationZona();
@@ -228,6 +249,44 @@ function buscarCasos(cb) {
         }
     });         
 }
+function buscarNews(cb) {
+    $.ajax({
+        // url: "http://ec2-54-196-120-46.compute-1.amazonaws.com/api-corona/noticias",
+        // url: "http://[::1]/corona/noticias.php/",
+        type: 'get',
+        dataType: 'json',
+        processData: false,
+        contentType: "application/x-www-form-urlencodedy",
+        success: function(resultado) {
+            if (typeof cb == "function") {
+                cb(resultado);
+            }
+        }
+    });
+}
+function convertXmlToJSon(xml) {
+    let x2js = new X2JS();
+    return x2js.xml_str2json(xml);
+}
+function templateNews(news) {
+    let imagens_substitutas = ["coronavirus-img-noticia-default.jpg", "coronavirus-img-noticia-default-2.jpg", "coronavirus-img-noticia-default-3.jpg"]
+
+    let linkImage = (news.description.__cdata)? news.description.__cdata : news.description;
+    linkImage = linkImage.slice(linkImage.search('https:'), linkImage.search('.jpg') + 5);
+    if (!linkImage) {
+        linkImage = imagens_substitutas[Math.floor(Math.random() * (3 - 0))];
+    }
+    let link = news.link;
+    let title = news.title;
+
+    return `
+        <a href="${link}" class="template-noticia">
+            <img class="news-image" src="${linkImage}">
+            <div> ${title} </div>
+        </a>
+    `;
+}
+
 function setTotalCountTo(element, data, cb) {
     $(element).countTo({
         from: 0,

@@ -53,16 +53,7 @@ body {
 .estado-lista-cidades li {
     display: none;
 }
-/* .estado-selecionado {
-    height: auto;
-    transition: height .5s ease-in-out;
-}
-.estado-selecionado li {
-    display: block;
-} */
 .selecionado {
-    /* box-shadow: 0px 0px 5px 0px #000;
-    border-radius: 7px; */
     border-bottom: solid 1px #000;
     margin-bottom: 20px;
     padding-bottom: 7px;
@@ -92,16 +83,62 @@ body {
     height: 50px;
     margin: 0px 0px 14px 0px;
     align-items: center;
-    /* background-color: #3a3a3a; */
-    /* border-radius: 7px; */
-    /* box-shadow: 0px 0px 5px 0px #000; */
     border-bottom: solid 1px #15161b;
     cursor: pointer;
 }
 
+.template-noticia {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ddd;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 30px;
+    box-shadow: 0px 3px 6px 0px #000;
+}
+.template-noticia .news-image {
+    min-width: 100px;
+    width: 100px;
+    height: 100px;
+    border-radius: 7px;
+}
+.template-noticia div {
+    margin-left: 5px;
+    font-size: 14px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.news-title {
+    margin: 10px 0px;
+    font-size: 20px;
+}
+
+.news {
+    flex-wrap: wrap;
+    overflow: auto;
+    display: block;
+    z-index: 999;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0px 0px 37px #000;
+    font-size: 16px;
+    padding: 15px 10px;
+    background-color: #202029;
+}
+
+.none {
+    display: none;
+}
+
 @media (min-width: 600px) {
     .country {
-        position: fixed;
+        /* position: fixed; */
         top: 0px;
         left: 0px;
         bottom: 0px;
@@ -124,6 +161,22 @@ body {
     .country div span:first-child, ul {
         display: none;
     }
+    .container {
+        display: flex;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        width: 400px;
+    }
+    .news {
+        width: 300px;
+    }
+
+    .container:hover {
+        width: 700px;
+    }
 
     .country .cities-list {
         overflow-y: auto;
@@ -141,20 +194,20 @@ body {
     .country .cidade-selecionada {
         display: none;
     }
+
 }
 
 @media (max-width: 599px) {
     .mobile {
-        position: absolute;
+        /* position: absolute;
         left: 0px;
-        right: 0px;
+        right: 0px; */
         border-top-left-radius: 14px;
         border-top-right-radius: 14px;
         z-index: 9999;
-        /* background-color: #3a3a3aeb; */
         background-color: #202029c7;
-        margin-top: 430px;
-        height: 100%;
+        /* margin-top: 430px; */
+        /* height: 100%; */
     }
     .mobile div span.casos-ocorridos:nth-child(2) {
         display: none;
@@ -182,7 +235,6 @@ body {
         height: 50px;
         margin: 0px 0px 24px 0px;
         border-radius: 7px;
-        /* background-color: #3a3a3a; */
         background-color: #000;
         align-items: center;
         box-shadow: 0px 0px 5px 0px #000;
@@ -201,7 +253,6 @@ body {
         left: 0px;
         right: 0px;
         bottom: 0px;
-        /* background-color: #3a3a3aeb; */
         background-color: #202029;
         z-index: 99999;
     }
@@ -211,6 +262,15 @@ body {
         padding: 10px;
         height: 100%;
         margin: 0;
+    }
+
+    .container {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        margin-top: 430px;
     }
 }
 
@@ -347,22 +407,22 @@ img.leaflet-tile.leaflet-tile-loaded {
 }
 
 /* width */
-.cities-list::-webkit-scrollbar {
+.cities-list::-webkit-scrollbar, .news::-webkit-scrollbar {
     width: 3px;
 }
 
 /* Track */
-.cities-list::-webkit-scrollbar-track {
+.cities-list::-webkit-scrollbar-track, .news::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
 
 /* Handle */
-.cities-list::-webkit-scrollbar-thumb {
+.cities-list::-webkit-scrollbar-thumb, .news::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 14px;
 }
 
 /* Handle on hover */
-.cities-list::-webkit-scrollbar-thumb:hover {
+.cities-list::-webkit-scrollbar-thumb:hover, .news::-webkit-scrollbar-thumb:hover {
     background: #555;
 }

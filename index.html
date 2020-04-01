@@ -40,76 +40,81 @@
 
 </head>
 <body>
-    <div class="container">
+    <div>
         <div id="mapa"></div>
 
-        <div class="country mobile">
-            <div class="pullbar"></div>
-            <div class="title">
-                <span>COVIDBRASIL</span>
-            </div>
+        <div class="container">
+            <div class="country mobile">
+                <div class="pullbar"></div>
+                <div class="title">
+                    <span>COVIDBRASIL</span>
+                </div>
 
-            <div class="cidade-selecionada">
-                <div class="template-cidade-selecionada" data-lat="${lat}" data-lng="${lng}">
-                    <span id="cidadeSelecionadaNome" style="margin: 0px 0px 0px 25px">Brasil</span>
-                    <span class="total-casos" style="margin: 0px 25px 0px 0px; font-weight: bold;">
-                        <span id="cidadeSelecionadaTotalCasos">0</span>
-                        <i class="fa fa-chevron-down"></i>
+                <div class="cidade-selecionada">
+                    <div class="template-cidade-selecionada" data-lat="${lat}" data-lng="${lng}">
+                        <span id="cidadeSelecionadaNome" style="margin: 0px 0px 0px 25px">Brasil</span>
+                        <span class="total-casos" style="margin: 0px 25px 0px 0px; font-weight: bold;">
+                            <span id="cidadeSelecionadaTotalCasos">0</span>
+                            <i class="fa fa-chevron-down"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="total-casos">Total de casos:</span>
+                    <span class="casos-ocorridos">
+                        <div class="casos-notificacao casos"></div>
                     </span>
+                    <span id="totalCasos">0</span>
+                </div>
+                <hr>
+                <div>
+                    <span class="casos-ocorridos">
+                        <div class="casos-notificacao confirmado"></div>
+                        Confirmados:
+                    </span>
+                    <span class="casos-ocorridos">
+                        <div class="casos-notificacao confirmado"></div>
+                    </span>
+                    <span id="totalConfirmado">0</span>
+                </div>
+                <div>
+                    <span class="casos-ocorridos">
+                        <div class="casos-notificacao suspeito"></div>
+                        Suspeitas:
+                    </span>
+                    <span class="casos-ocorridos">
+                        <div class="casos-notificacao suspeito"></div>
+                    </span>
+                    <span id="totalSuspeito">0</span>
+                </div>
+                <div>
+                    <span class="casos-ocorridos">
+                        <div class="casos-notificacao mortos"></div>
+                        Mortos:
+                    </span>
+                    <span class="casos-ocorridos">
+                        <div class="casos-notificacao mortos"></div>
+                    </span>
+                    <span id="totalMortos">0</span>
+                </div>
+                <div>
+                    <span class="casos-ocorridos">
+                        <div class="casos-notificacao vivos"></div>
+                        População:
+                    </span>
+                    <span class="casos-ocorridos">
+                        <div class="casos-notificacao vivos"></div>
+                    </span>
+                    <span id="totalVivos">0</span>
+                </div>
+                <hr>
+                <div class="container-cities-list">
+                    <ul class="cities-list"></ul>
                 </div>
             </div>
-
-            <div>
-                <span class="total-casos">Total de casos:</span>
-                <span class="casos-ocorridos">
-                    <div class="casos-notificacao casos"></div>
-                </span>
-                <span id="totalCasos">0</span>
-            </div>
-            <hr>
-            <div>
-                <span class="casos-ocorridos">
-                    <div class="casos-notificacao confirmado"></div>
-                    Confirmados:
-                </span>
-                <span class="casos-ocorridos">
-                    <div class="casos-notificacao confirmado"></div>
-                </span>
-                <span id="totalConfirmado">0</span>
-            </div>
-            <div>
-                <span class="casos-ocorridos">
-                    <div class="casos-notificacao suspeito"></div>
-                    Suspeitas:
-                </span>
-                <span class="casos-ocorridos">
-                    <div class="casos-notificacao suspeito"></div>
-                </span>
-                <span id="totalSuspeito">0</span>
-            </div>
-            <div>
-                <span class="casos-ocorridos">
-                    <div class="casos-notificacao mortos"></div>
-                    Mortos:
-                </span>
-                <span class="casos-ocorridos">
-                    <div class="casos-notificacao mortos"></div>
-                </span>
-                <span id="totalMortos">0</span>
-            </div>
-            <div>
-                <span class="casos-ocorridos">
-                    <div class="casos-notificacao vivos"></div>
-                    População:
-                </span>
-                <span class="casos-ocorridos">
-                    <div class="casos-notificacao vivos"></div>
-                </span>
-                <span id="totalVivos">0</span>
-            </div>
-            <hr>
-            <div class="container-cities-list">
-                <ul class="cities-list"></ul>
+            <div class="news none">
+                <span class="news-title">Noticias</span>
             </div>
         </div>
     </div>
@@ -119,6 +124,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-countto/1.2.0/jquery.countTo.min.js"></script>
+    <script src="https://cdn.rawgit.com/abdmob/x2js/master/xml2json.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
