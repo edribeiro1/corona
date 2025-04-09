@@ -1,32 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161434137-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-161434137-1');
-    </script>
-    <script data-ad-client="ca-pub-5995345408012843" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- COVID -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5995345408012843"
-            data-ad-slot="3362186747"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-    <!--  -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coronavirus</title>
-    <meta name="description" content="Coronavirus fique por dentro dos estados e cidades com covid-19, tudo isso em tempo real, COVID-19 e perigoso">
+    <meta name="description" content="Coronavirus fique por dentro dos estados com covid-19, tudo isso em tempo real, COVID-19 é perigoso">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css">
@@ -45,21 +23,9 @@
 
         <div class="container">
             <div class="country mobile">
-                <div class="pullbar"></div>
                 <div class="title">
-                    <span>COVIDBRASIL</span>
+                    <span>Covid Brasil</span>
                 </div>
-
-                <div class="cidade-selecionada">
-                    <div class="template-cidade-selecionada" data-lat="${lat}" data-lng="${lng}">
-                        <span id="cidadeSelecionadaNome" style="margin: 0px 0px 0px 25px">Brasil</span>
-                        <span class="total-casos" style="margin: 0px 25px 0px 0px; font-weight: bold;">
-                            <span id="cidadeSelecionadaTotalCasos">0</span>
-                            <i class="fa fa-chevron-down"></i>
-                        </span>
-                    </div>
-                </div>
-
                 <div>
                     <span class="total-casos">Total de casos:</span>
                     <span class="casos-ocorridos">
@@ -77,16 +43,6 @@
                         <div class="casos-notificacao confirmado"></div>
                     </span>
                     <span id="totalConfirmado">0</span>
-                </div>
-                <div>
-                    <span class="casos-ocorridos">
-                        <div class="casos-notificacao suspeito"></div>
-                        Suspeitas:
-                    </span>
-                    <span class="casos-ocorridos">
-                        <div class="casos-notificacao suspeito"></div>
-                    </span>
-                    <span id="totalSuspeito">0</span>
                 </div>
                 <div>
                     <span class="casos-ocorridos">
@@ -108,13 +64,6 @@
                     </span>
                     <span id="totalVivos">0</span>
                 </div>
-                <hr>
-                <div class="container-cities-list">
-                    <ul class="cities-list"></ul>
-                </div>
-            </div>
-            <div class="news none">
-                <span class="news-title">Noticias</span>
             </div>
         </div>
     </div>
